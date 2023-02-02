@@ -14,6 +14,7 @@ POSTGRESQL_HOST=
 POSTGRESQL_DB=
 POSTGRESQL_USER=
 POSTGRESQL_PASS=
+POSTGRESQL_PORT=
 
 # run docker image
 docker run -dti --name flask-pgsqlcheck --network-mode host flask-pgsqlcheck

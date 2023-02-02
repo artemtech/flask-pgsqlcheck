@@ -9,6 +9,7 @@ db_configs = {
     "database": os.environ.get('POSTGRESQL_DB', 'postgres'),
     "user": os.environ.get('POSTGRESQL_USER', 'postgres'),
     "password": os.environ.get('POSTGRESQL_PASS', ''),
+    "port": os.environ.get('POSTGRESQL_PORT', ''),
 }
 
 def check_postgresql():

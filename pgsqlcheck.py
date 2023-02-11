@@ -20,10 +20,10 @@ def check_postgresql():
         cur = conn.cursor()
         cur.execute("select pg_is_in_recovery()")
 
-        recovery = cur.fetchone()
+        recovery = cur.fetchone()[0]
         cur.close()
-    except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
+    except Exception as error:
+        app.logger.debug(error)
     finally:
         if conn is not None:
             conn.close()
@@ -32,9 +32,9 @@ def check_postgresql():
 @app.route('/', methods=['GET'])
 def pgsqlcheck():
     recovery = check_postgresql()
-    if recovery == "t":
+    if recovery == True:
         response = make_response("Standby", 206)
-    elif recovery == "f":
+    elif recovery == False:
         response = make_response("Primary", 200)
     else:
         response = make_response("DBDown", 503)
@@ -42,4 +42,4 @@ def pgsqlcheck():
     return response
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host=0.0.0.0, port=25432)

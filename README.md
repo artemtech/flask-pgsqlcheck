@@ -1,5 +1,8 @@
 # flask-pgsqlcheck
-flask version of xinetd for pgsqlcheck
+flask version of xinetd for pgsqlcheck. 
+The idea is we run query to postgres `select pg_is_in_recovery()`. This query will return true or false.
+So, if it is true, then our instance is standby node, otherwise it is primary node. If the node is unreachable, then it will marked as DOWN. 
+This script is suitable for creating high-availability postgresql behind haproxy.
 
 ## Build docker image
 ```
